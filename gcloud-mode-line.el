@@ -29,7 +29,7 @@
 (defvar gcloud-timer nil)
 (defvar gcloud-string "")
 (defvar gcloud-update-interval 10 "Number of seconds between background mode-line updates")
-(defvar gcloud-string-format " %P" "String to display in mode-line (%P = project")
+(defvar gcloud-string-format " [gcp:%P]" "String to display in mode-line (%P = project")
 
 (defun gcloud-run (&rest args)
   "Run gcloud command"
