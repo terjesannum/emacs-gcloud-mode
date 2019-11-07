@@ -1,13 +1,23 @@
 # emacs-gcloud-mode
 
-Display current gcloud project in Emacs mode line
+Global minor-mode to change gcloud project and display current project in Emacs mode line
 
+## Install
+
+Clone this repository and add to `load-path`:
 ```lisp
 (add-to-list 'load-path "~/.emacs.d/emacs-gcloud-mode")
 (require 'gcloud-mode)
+(gcloud-mode 1)
 ```
 
-Enable it with `M-x gcloud-mode` or `(gcloud-mode 1)`
+### Keybindings
+
+| Keys        | Description               |
+| ---------   | ------------------------- |
+| `C-c C-g p` | Set gcloud project        |
+
+### Mode line
 
 The mode line will be updated every 10 seconds or what is defined in
 `gcloud-mode-mode-line-update-interval`. 
