@@ -1,6 +1,6 @@
 # emacs-gcloud-mode
 
-Global minor-mode to change gcloud project and display current project in Emacs mode line
+Global minor-mode for changing gcloud project and display current project in Emacs mode line
 
 ## Install
 
