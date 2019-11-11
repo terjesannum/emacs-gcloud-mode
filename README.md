@@ -19,11 +19,12 @@ Clone this repository and add to `load-path`:
 
 ### Mode line
 
-The mode line will be updated every 10 seconds or what is defined in
-`gcloud-mode-mode-line-update-interval`. 
+The variable `gcloud-mode-line-string-format` defines what to display in the mode line, and
+mode line will be updated every 10 seconds or what is defined in
+`gcloud-mode-line-update-interval`.
 
 You can also trigger the update with `emacsclient` as a `PROMPT_COMMAND`:
 
 ```bash
-export PROMPT_COMMAND="emacsclient -e '(gcloud-mode-mode-line-update)' &>/dev/null"
+export PROMPT_COMMAND="emacsclient -e '(gcloud-mode-line-update)' &>/dev/null"
 ```
