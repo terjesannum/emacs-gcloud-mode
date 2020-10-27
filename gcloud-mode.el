@@ -28,15 +28,15 @@
 
 (require 'tramp)
 
-(defvar gcloud-command "gcloud" "gcloud executable")
+(defvar gcloud-command "gcloud" "Gcloud executable.")
 (defvar gcloud-mode-line-update-timer nil)
 (defvar gcloud-mode-line-string "")
-(defvar gcloud-mode-line-update-interval 10 "Number of seconds between background mode-line updates")
-(defvar gcloud-mode-line-string-format " [gcp:%P]" "String to display in mode-line (%P = project")
+(defvar gcloud-mode-line-update-interval 10 "Number of seconds between background mode-line updates.")
+(defvar gcloud-mode-line-string-format " [gcp:%P]" "String to display in mode-line (%P = project).")
 (defvar gcloud-mode-submap)
 (define-prefix-command 'gcloud-mode-submap)
 (define-key gcloud-mode-submap "p" 'gcloud-set-project)
-(defvar gcloud-mode-keybind (kbd "C-c C-g") "Keybind where gcloud-mode-submap is assigned")
+(defvar gcloud-mode-keybind (kbd "C-c C-g") "Keybind where gcloud-mode-submap is assigned.")
 (defvar gcloud-remote-shell "/bin/sh" "Remote shell to be used on gcloud.")
 (defvar gcloud-tunnel-through-iap nil "Use tunnel-through-iap for gcloud shells.")
 
@@ -53,7 +53,7 @@
                    (tramp-default-port         22))))
 
 (defun gcloud-run-gcloud-command (&rest args)
-  "Run gcloud command"
+  "Run gcloud command with ARGS."
   (with-temp-buffer
     (let ((default-directory "~"))
       (if (and (executable-find gcloud-command)
@@ -62,11 +62,11 @@
         "n/a"))))
 
 (defun gcloud-projects ()
-  "Get list of projects"
+  "Get list of gcloud projects."
   (split-string (gcloud-run-gcloud-command "projects" "list" "--format=value(project_id)")))
 
 (defun gcloud-set-project (project)
-  "Set current gcloud project"
+  "Set PROJECT as current gcloud project."
   (interactive
    (list
     (completing-read "Project: " (gcloud-projects) nil t)))
@@ -74,18 +74,18 @@
   (gcloud-mode-line-update))
 
 (defun gcloud-mode-line-string (project)
-  "Create gcloud string to display in mode-line"
+  "Create gcloud string containing PROJECT to display in mode-line."
   (replace-regexp-in-string "%P" project gcloud-mode-line-string-format t))
 
 (defun gcloud-mode-line-update ()
-  "Update gcloud mode-line string with current project"
+  "Update gcloud mode-line string with current project."
   (interactive)
   (let ((project (gcloud-run-gcloud-command "config" "get-value" "project")))
     (setq gcloud-mode-line-string (gcloud-mode-line-string project))
     (force-mode-line-update t)))
 
 (define-minor-mode gcloud-mode
-  "Change gcloud project and display current project in the mode line"
+  "Change gcloud project and display current project in the mode line."
   :global t
   :keymap `((,gcloud-mode-keybind . ,gcloud-mode-submap))
   (when (not global-mode-string) (setq global-mode-string '("")))
