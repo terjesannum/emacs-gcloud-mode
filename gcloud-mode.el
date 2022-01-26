@@ -26,8 +26,6 @@
 
 ;;; Code:
 
-(require 'tramp)
-
 (defvar gcloud-command "gcloud" "Gcloud executable.")
 (defvar gcloud-mode-line-update-timer nil)
 (defvar gcloud-mode-line-string "")
@@ -37,20 +35,6 @@
 (define-prefix-command 'gcloud-mode-submap)
 (define-key gcloud-mode-submap "p" 'gcloud-set-project)
 (defvar gcloud-mode-keybind (kbd "C-c C-g") "Keybind where gcloud-mode-submap is assigned.")
-(defvar gcloud-remote-shell "/bin/sh" "Remote shell to be used on gcloud.")
-(defvar gcloud-tunnel-through-iap nil "Use tunnel-through-iap for gcloud shells.")
-
-(defun gcloud-add-tramp-method ()
-    "Add gcloud method to tramp."
-    (add-to-list 'tramp-methods
-                 `("gcloud"
-                   (tramp-login-program        ,gcloud-command)
-                   (tramp-login-args           ,(list (append '("compute" "ssh")
-                                                              (when gcloud-tunnel-through-iap
-                                                                '("--tunnel-through-iap"))) '("%h")))
-                   (tramp-remote-shell         ,gcloud-remote-shell)
-                   (tramp-remote-shell-args    ("-c"))
-                   (tramp-default-port         22))))
 
 (defun gcloud-run-gcloud-command (&rest args)
   "Run gcloud command with ARGS."
